@@ -1,0 +1,17 @@
+.board {
+    display: flex;
+    flex-wrap:wrap;
+    width:400px;
+    height:400px;
+    background-color: blue;
+}
+
+.board div{
+    width:100px;
+    height:100px;
+    background-color: #56cfe1;
+    font-size:50px;
+    text-align: center;
+    font-weight:bold;
+
+}
