@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
 
 
+
     //create board
 
     function createBoard() {
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (squares[randomNumber].innerHTML == 0) {
             let r = Math.random(1);
             squares[randomNumber].innerHTML = r > 0.5 ? 2 : 4;
-            checkForGameOver();
+            //checkForGameOver();
         }
         else generate();
     }
@@ -148,8 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 squares[i].innerHTML = combinedTotal;
                 squares[i + 1].innerHTML = 0;
 
-                score += combinedTotal
-                scoreDisplay.innerHTML = score
+                score += combinedTotal;
+                scoreDisplay.innerHTML = score;
+
+
+                //scoreNotchanged
+
+
+
+
             }
         }
         checkforWin();
@@ -164,8 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 squares[i].innerHTML = combinedTotal;
                 squares[i + width].innerHTML = 0;
 
-                score += combinedTotal
-                scoreDisplay.innerHTML = score
+                score += combinedTotal;
+                scoreDisplay.innerHTML = score;
+
+
             }
         }
         checkforWin();
@@ -188,33 +198,141 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keyup', control)
 
+
+    //how keyright works
+
     function keyRight() {
+        let currentState = [];
+        let nextState = [];
+        let isEqual = true;
+
+        for (let i = 0; i < squares.length; i++) {
+            currentState[i] = parseInt(squares[i].innerHTML);
+        }
+
         moveRight();
         combineRow();
         moveRight();
-        generate();
+
+        for (let i = 0; i < squares.length; i++) {
+            nextState[i] = parseInt(squares[i].innerHTML);
+        }
+
+        for (let i = 0; i < squares.length; i++) {
+            if (currentState[i] !== nextState[i]) {
+                isEqual = false;
+            }
+        }
+
+        if (!isEqual) {
+            generate();
+        }else{
+            checkForGameOver();
+        }
     }
+
+
+
+    //how keyleft works
 
     function keyLeft() {
+        let currentState = [];
+        let nextState = [];
+        let isEqual = true;
+
+        for (let i = 0; i < squares.length; i++) {
+            currentState[i] = parseInt(squares[i].innerHTML);
+        }
         moveLeft();
         combineRow();
         moveLeft();
-        generate();
+
+        for (let i = 0; i < squares.length; i++) {
+            nextState[i] = parseInt(squares[i].innerHTML);
+        }
+
+        for (let i = 0; i < squares.length; i++) {
+            if (currentState[i] !== nextState[i]) {
+                isEqual = false;
+            }
+        }
+
+        if (!isEqual) {
+            generate();
+        }else{
+            checkForGameOver();
+        }
     }
+
+
+
+    //how keyup works
 
     function keyUp() {
+
+        let currentState = [];
+        let nextState = [];
+        let isEqual = true;
+
+        for (let i = 0; i < squares.length; i++) {
+            currentState[i] = parseInt(squares[i].innerHTML);
+        }
+
         moveUp();
         combineColumn();
         moveUp();
-        generate();
+
+        for (let i = 0; i < squares.length; i++) {
+            nextState[i] = parseInt(squares[i].innerHTML);
+        }
+
+        for (let i = 0; i < squares.length; i++) {
+            if (currentState[i] !== nextState[i]) {
+                isEqual = false;
+            }
+        }
+
+        if (!isEqual) {
+            generate();
+        }else{
+            checkForGameOver();
+        }
     }
 
+
+    //how keydown works
+
     function keyDown() {
+        let currentState = [];
+        let nextState = [];
+        let isEqual = true;
+
+        for (let i = 0; i < squares.length; i++) {
+            currentState[i] = parseInt(squares[i].innerHTML);
+        }
+
         moveDown();
         combineColumn();
         moveDown();
-        generate();
+
+        for (let i = 0; i < squares.length; i++) {
+            nextState[i] = parseInt(squares[i].innerHTML);
+        }
+
+        for (let i = 0; i < squares.length; i++) {
+            if (currentState[i] !== nextState[i]) {
+                isEqual = false;
+            }
+        }
+
+        if (!isEqual) {
+            generate();
+        }else{
+            checkForGameOver();
+        }
     }
+
+
 
 
     //check for win i.e. one of square is 2048 in board
